@@ -1,0 +1,17 @@
+{
+  "name": "nightwatch-errors",
+  "version": "1.0.0",
+  "description": "Testing nightwatch error handling",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "nightwatch"
+  ],
+  "author": "senocular",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "lodash": "^4.15.0",
+    "nightwatch": "^0.9.8"
+  }
+}

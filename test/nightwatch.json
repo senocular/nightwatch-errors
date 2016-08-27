@@ -1,0 +1,41 @@
+{
+  "src_folders" : ["./tests/"],
+  "globals_path" : "./globals.js",
+  "output_folder" : false,
+  "output" : true,
+
+  "selenium": {
+      "start_process": true,
+      "start_session" : false,
+      "server_path": "../lib/selenium-server-standalone-2.52.0.jar",
+      "log_path": "",
+      "host": "127.0.0.1",
+      "port": 4444,
+      "cli_args": {
+          "webdriver.chrome.driver": "../lib/chromedriver",
+          "trustAllSSLCertificates": true
+      }
+  },
+  "test_workers" : false,
+  "end_session_on_fail": false,
+  "skip_testcases_on_fail": false,
+
+  "test_settings" : {
+    "default" : {
+      "silent" : false,
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true
+      },
+      "globals" : {
+        "asyncHookTimeout": 100
+      }
+    },
+    "foo" : {
+      "globals" : {
+        "foo" : 1
+      }
+    }
+  }
+}
