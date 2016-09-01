@@ -13,6 +13,7 @@
     "cli-color": "^1.1.0",
     "lodash": "^4.15.0",
     "nightwatch": "^0.9.8",
+    "ps-tree": "^1.1.0",
     "superchild": "^0.1.8"
   }
 }

@@ -1,6 +1,6 @@
 module.exports = {
 
-  errorTesting: require('./lib/errorTesting.js'),
+  errorTesting: require('./src/errorTesting.js'),
 
   before: function (done) {
     this.errorTesting.runHook('global', 'before', null, done);

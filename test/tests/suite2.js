@@ -8,16 +8,16 @@ module.exports = {
     browser.globals.errorTesting.runTest(browser);
   },
 
-  before: function (browser, done) {
-    browser.globals.errorTesting.runHook('suite', 'before', browser, done);
+  before: function (browser) {
+    browser.globals.errorTesting.runHook('suite', 'before', browser);
   },
-  beforeEach: function (browser, done) {
-    browser.globals.errorTesting.runHook('suite', 'beforeEach', browser, done);
+  beforeEach: function (browser) {
+    browser.globals.errorTesting.runHook('suite', 'beforeEach', browser);
   },
-  afterEach: function (browser, done) {
-    browser.globals.errorTesting.runHook('suite', 'afterEach', browser, done);
+  afterEach: function () { // boo!
+    this.client.globals.errorTesting.runHook('suite', 'afterEach', null);
   },
-  after: function (browser, done) {
-    browser.globals.errorTesting.runHook('suite', 'after', browser, done);
+  after: function (browser) {
+    browser.globals.errorTesting.runHook('suite', 'after', browser);
   }
 };

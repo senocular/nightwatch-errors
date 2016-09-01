@@ -1,9 +1,12 @@
-function ErrorTest (context, name, timing, error, count) {
+function ErrorTest (context, name, timing, error) {
   this.context = context;
   this.name = name;
   this.timing = timing || 'sync';
   this.error = error || 'throw';
-  this.count = count || 1;
 }
+
+ErrorTest.prototype.targetsAsyncHook = function() {
+  return this.context === 'suite' && this.timing !== 'sync'; // all others async
+};
 
 module.exports = ErrorTest;

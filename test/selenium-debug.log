@@ -1,12 +1,17 @@
-09:23:08.293 INFO - Launching a standalone Selenium Server
-09:23:08.320 INFO - Java: Oracle Corporation 25.92-b14
-09:23:08.320 INFO - OS: Mac OS X 10.11.6 x86_64
-09:23:08.328 INFO - v2.52.0, with Core v2.52.0. Built from revision 4c2593c
-09:23:08.377 INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
+02:47:10.851 INFO - Launching a standalone Selenium Server
+02:47:10.877 INFO - Java: Oracle Corporation 25.92-b14
+02:47:10.877 INFO - OS: Mac OS X 10.11.6 x86_64
+02:47:10.885 INFO - v2.52.0, with Core v2.52.0. Built from revision 4c2593c
+02:47:10.935 INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
 registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match the current platform MAC
-09:23:08.378 INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
+02:47:10.935 INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
 registration capabilities Capabilities [{browserName=MicrosoftEdge, version=, platform=WINDOWS}] does not match the current platform MAC
-09:23:08.378 INFO - Driver class not found: com.opera.core.systems.OperaDriver
-09:23:08.378 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
-09:23:08.438 INFO - RemoteWebDriver instances should connect to: http://127.0.0.1:4444/wd/hub
-09:23:08.438 INFO - Selenium Server is up and running
+02:47:10.935 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+02:47:10.935 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
+02:47:10.995 INFO - RemoteWebDriver instances should connect to: http://127.0.0.1:4444/wd/hub
+02:47:10.995 INFO - Selenium Server is up and running
+02:47:11.184 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, name=Suite1, browserName=chrome, javascriptEnabled=true, platform=ANY}]])
+02:47:11.192 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, name=Suite1, browserName=chrome, javascriptEnabled=true, platform=ANY}]
+Starting ChromeDriver 2.21.371459 (36d3d07f660ff2bc1bf28a75d1cdabed0983e7c4) on port 19288
+Only local connections are allowed.
+02:47:12.048 INFO - Done: [new session: Capabilities [{acceptSslCerts=true, name=Suite1, browserName=chrome, javascriptEnabled=true, platform=ANY}]]
