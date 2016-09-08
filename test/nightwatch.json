@@ -10,7 +10,7 @@
 
   "selenium": {
       "start_process": true,
-      "server_path": "../lib/selenium-server-standalone-2.52.0.jar",
+      "server_path": "../lib/selenium-server-standalone-2.53.1.jar",
       "log_path": "",
       "host": "127.0.0.1",
       "port": 4444,
@@ -32,7 +32,8 @@
       "globals" : {
         "asyncHookTimeout": 100,
         "errorTesting": {
-          "output": true
+          "output": false,
+          "outputJSON": true
         }
       }
     }

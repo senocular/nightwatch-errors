@@ -1,4 +1,6 @@
 *.DS_Store
 *reports
+test/selenium-debug.log
 node_modules
-lib
+lib/*
+!lib/*.md

@@ -1,12 +1,17 @@
 var clc = require('cli-color');
 var log = require('../../src/logger.js')(clc.bgYellow.black);
+var logJSON = function (json) {
+  console.log(JSON.stringify(json));
+};
+
 var BROWSER_REQUIRED = 'WARNING browser required for this test; not present';
 
 module.exports = {
-  errorTimeout: 50, // time to wait before generating an async error
-  output: false,    // when true, logs the test/hook steps
-  history: [],      // list of full names of methods run in the test run, e.g. suite.beforeEach
-  testcases: {},    // map of currentTest objects for each test case keyed by full name
+  errorTimeout: 50,   // time to wait before generating an async error
+  output: true,       // when true, logs the test/hook steps
+  outputJSON: false,  // when true, logs the test/hook steps in JSON format (independent of output)
+  history: [],        // list of full names of methods run in the test run, e.g. suite.beforeEach
+  testcases: {},      // map of currentTest objects for each test case keyed by full name
 
   // meta:
   contexts: ['global', 'suite'],                             // or test suite name when using testcase name for name
@@ -28,30 +33,9 @@ module.exports = {
   */
 
   runHook: function (context, name, browser, done) {
-    var fullName = this._getFullName(context, name);
-
-    if (fullName === 'global.before') {
-      log(' *** ADDING HANDLERS');
-      process.on('exit', function (code) {
-        log(' *** PROCESS EXIT');
-      });
-      process.on('beforeExit', function (code) {
-        log(' *** PROCESS BEFORE EXIT', arguments);
-      });
-      process.on('uncaughtException', function (code) {
-        log(' *** PROCESS EXCEPT');
-      });
-      // process.once('SIGINT', function (code) {
-      //   log(' *** PROCESS SIGINT');
-      //   process.exit();
-      // });
-
-      log(' *** SEND JSON MESSAGE');
-      console.log('{"foo":"bar"}');
-    }
 
     var test = this._findMatchingTest(context, name);
-    this._logTest(context, name, test);
+    this._logTest(context, name, test, browser && browser.currentTest);
 
     if (test) {
 
@@ -73,6 +57,7 @@ module.exports = {
     }
 
     // TODO: Where is the best place to try to call this?
+    var fullName = this._getFullName(context, name);
     if (fullName === 'global.afterEach') {
       if (browser && typeof browser.end === 'function') {
         browser.end();
@@ -154,7 +139,7 @@ module.exports = {
     return false;
   },
 
-  _logTest: function (context, name, test, currentTest) {
+  _logTest: function (context, name, matchedErrorTest, currentTest) {
 
     var fullName = this._getFullName(context, name);
     this.history.push(fullName);
@@ -166,10 +151,25 @@ module.exports = {
     if (this.output) {
 
       var msg = fullName;
-      if (test) {
-        msg += ' Matches: ' + JSON.stringify(test);
+      if (matchedErrorTest) {
+        msg += ' Matches: ' + JSON.stringify(matchedErrorTest);
       }
       log(msg);
+    }
+
+    if (this.outputJSON) {
+
+      logJSON({
+        type: 'test',
+        value: {
+          history: this.history,
+          errorTest: {
+            name: matchedErrorTest && fullName,
+            test: matchedErrorTest,
+          },
+          currentTest: currentTest
+        }
+      });
     }
   },
 

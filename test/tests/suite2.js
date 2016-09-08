@@ -15,7 +15,7 @@ module.exports = {
     browser.globals.errorTesting.runHook('suite', 'beforeEach', browser);
   },
   afterEach: function () { // boo!
-    this.client.globals.errorTesting.runHook('suite', 'afterEach', null);
+    this.client.globals.errorTesting.runHook('suite', 'afterEach', this.client);
   },
   after: function (browser) {
     browser.globals.errorTesting.runHook('suite', 'after', browser);
