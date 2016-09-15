@@ -2,6 +2,10 @@
   "name": "nightwatch-errors",
   "version": "1.0.0",
   "description": "Testing nightwatch error handling",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/senocular/nightwatch-errors.git"
+  },
   "main": "index.js",
   "scripts": {},
   "keywords": [

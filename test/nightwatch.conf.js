@@ -2,6 +2,7 @@ var _ = require('lodash');
 
 module.exports = (function(settings) {
 
+  // merge in test cases settings JSON
   try {
     var argv = process.argv;
     var confIndex = argv.indexOf('---conf');
@@ -11,8 +12,16 @@ module.exports = (function(settings) {
       _.merge(settings, conf);
     }
   }catch(err){
-    console.error('Could not capture configuration values from ---conf argument: ', err);
+    console.error('ERROR: Could not capture configuration values from ---conf argument: ', err);
   }
+
+  // output the settings if required
+  try {
+    var env = 'default';
+    if (settings.test_settings[env].globals.errorTesting.outputSettings) {
+      console.log(settings);
+    }
+  } catch (ignore) {}
 
   return settings;
 })(require('./nightwatch.json'));

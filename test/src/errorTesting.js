@@ -10,6 +10,7 @@ module.exports = {
   errorTimeout: 50,   // time to wait before generating an async error
   output: true,       // when true, logs the test/hook steps
   outputJSON: false,  // when true, logs the test/hook steps in JSON format (independent of output)
+  outputSettings: false, // when true, the settings JSON is logged in the output; must get set for nightwatch.conf.js (not here)
   history: [],        // list of full names of methods run in the test run, e.g. suite.beforeEach
   testcases: {},      // map of currentTest objects for each test case keyed by full name
 
@@ -18,8 +19,8 @@ module.exports = {
   names:    ['before', 'beforeEach', 'afterEach', 'after'],  // only applies to 'global' and 'suite'
                                                              // or test case name when context is test suite name
   timings:  ['timeout', 'sync', 'sync-done', 'async'],       // 'sync-done' uses hook with a done param, but calls done async
-  errors:   ['throw', 'assert', 'verify', 'expect', 'done'], // ignored for 'timeout'
-                                                             // only 'throw', 'done' supported for global.before, global.after
+  errors:   ['throw', 'expect', 'done', 'assert', 'verify',  // ignored for 'timeout'
+             'assert-sync', 'verify-sync'],                  // only 'throw', 'done' supported for global.before, global.after
 
   /* Set by individual tests to determine what error to test
      (array of these objects also works):
@@ -188,13 +189,25 @@ module.exports = {
 
     case 'assert':
       if (browser) {
-        browser.assert.ok(false, 'Assertion failure for ' + testStr + '.');
+        browser.assert.elementPresent('#does-not-exist');
       } else log(BROWSER_REQUIRED);
       break;
 
     case 'verify':
       if (browser) {
-        browser.assert.ok(false, 'Verify failure for ' + testStr + '.');
+        browser.verify.elementPresent('#does-not-exist');
+      } else log(BROWSER_REQUIRED);
+      break;
+
+    case 'assert-sync':
+      if (browser) {
+        browser.assert.ok(false, 'Assert-sync failure for ' + testStr + '.');
+      } else log(BROWSER_REQUIRED);
+      break;
+
+    case 'verify-sync':
+      if (browser) {
+        browser.verify.ok(false, 'Verify-sync failure for ' + testStr + '.');
       } else log(BROWSER_REQUIRED);
       break;
 

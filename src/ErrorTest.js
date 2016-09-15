@@ -8,6 +8,15 @@ function ErrorTest (context, name, timing, error) {
   this.error = error || 'throw'; // 'throw', 'assert', 'verify', 'expect', 'done'
 }
 
+// static methods since errorTest may be a POJO
+
+ErrorTest.toString = function(errorTest) {
+  if (!errorTest) {
+    return '[Test <none>]';
+  }
+  return '[Test ' + errorTest.context + '.' + errorTest.name + ' ' + errorTest.timing + ' ' + errorTest.error + ']';
+};
+
 ErrorTest.targetsAsyncHook = function(errorTest) {
   return errorTest.context === 'suite' && errorTest.timing !== 'sync'; // all others async
 };

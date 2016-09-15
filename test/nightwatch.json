@@ -2,11 +2,6 @@
   "src_folders" : ["tests"],
   "globals_path" : "globals.js",
   "output_folder" : "reports",
-  "output" : true,
-
-  "test_workers" : false,
-  "-end_session_on_fail": false,
-  "-skip_testcases_on_fail": false,
 
   "selenium": {
       "start_process": true,
@@ -15,8 +10,7 @@
       "host": "127.0.0.1",
       "port": 4444,
       "cli_args": {
-          "webdriver.chrome.driver": "../lib/chromedriver",
-          "trustAllSSLCertificates": true
+          "webdriver.chrome.driver": "../lib/chromedriver"
       }
   },
 
@@ -25,15 +19,15 @@
       "silent" : true,
       "desiredCapabilities": {
         "browserName": "chrome",
-        "javascriptEnabled": true,
-        "acceptSslCerts": true
+        "javascriptEnabled": true
       },
       
       "globals" : {
         "asyncHookTimeout": 100,
         "errorTesting": {
           "output": false,
-          "outputJSON": true
+          "outputJSON": true,
+          "outputSettings": true
         }
       }
     }

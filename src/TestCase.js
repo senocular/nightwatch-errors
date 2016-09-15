@@ -9,11 +9,12 @@ var TestCaseResults = require('./TestCaseResults.js');
 var ErrorTest = require('./ErrorTest.js');
 
 var CHILD_PROC_POLL = 250;  // interval to poll nw process for child processes
+var TEST_CASE_TIMEOUT = 5000;
 
 function TestCase(desc) {
 
-  this.env = 'default';  // nw environment passed to nw call
-  this.timeoutTime = 7500;        // ms, time to wait for a run to finish before its killed
+  this.env = 'default'; // nw environment passed to nw call
+  this.timeoutTime = TEST_CASE_TIMEOUT; // ms, time to wait for a run to finish before its killed
 
   desc = desc || {};
   this.disabled = desc.disabled || false;
@@ -39,8 +40,6 @@ TestCase.prototype.getResults = function() {
 TestCase.prototype.run = function (runCompleteCallback) {
 
   this._runCompleteCallback = runCompleteCallback;
-
-  log('RUNNING:', this.name || '<unnamed testCase>');
 
   var confStr = JSON.stringify(this._conf);
   var confStrQt = "'" + confStr.replace("'", "\\'") + "'";
@@ -71,6 +70,7 @@ TestCase.prototype._onTestMessage = function (json) {
 
 TestCase.prototype._onTestExit = function (code, signal) {
   this._cleanupNightwatchProcess();
+
   this.results.setExit(code, signal, this._childProcesses);
 
   if (this._runCompleteCallback) {
@@ -156,6 +156,7 @@ TestCase.prototype._captureChildren = function () {
 };
 
 TestCase.prototype._startTimeoutTimer = function () {
+  this._stopTimeoutTimer();
   this._timeoutId = setTimeout(this._onTestTimeout, this.timeoutTime);
 };
 
